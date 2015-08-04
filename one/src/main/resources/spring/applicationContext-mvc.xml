@@ -21,7 +21,18 @@
 	<context:annotation-config />
 	<!-- 把标记了@Controller注解的类转换为bean -->
 	<context:component-scan base-package="com.xs.one" />
-	<mvc:annotation-driven/>
+	<mvc:annotation-driven content-negotiation-manager="contentNegotiationManager">
+		<mvc:message-converters>
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>text/plain;charset=UTF-8</value>
+						<value>text/html;charset=UTF-8</value>
+					</list>
+				</property>
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
 	<mvc:resources mapping="/static/**" location="/static/"/>
 	<mvc:resources mapping="/resources/**/" location="/resources/"/>
 	

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      xmlns:dt="http://www.thymeleaf.org/dandelion/datatables">
+<head>
+    <meta name="content-type" content="text/html; charset=UTF-8"/>
+    <title>thymleaf示例页面</title>
+    <script th:href="@{/static/js/jquery-1.9.1.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/static/css/main.css}" />
+</head>
+<body>
+<input type="hidden" id="baseUrl" th:value="@{/}"/>
+<h1>label:<label th:text="${msg}"></label></h1>
+<h1>span:<span th:text="${msg+'你好'}"></span></h1>
+<h1>text:<input type="text" th:value="${msg}" id="text"></input></h1>
+</body>
+</html>
