@@ -62,7 +62,7 @@
 	<!-- 定义错误页面 -->
 	<error-page>
 		<error-code>404</error-code>
-		<location>/404</location>
+		<location>/thymleaf/404</location>
 	</error-page>
 	<!-- 定义session失效时间 -->
 	<session-config>

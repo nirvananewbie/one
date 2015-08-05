@@ -13,5 +13,6 @@
 <h1>label:<label th:text="${msg}"></label></h1>
 <h1>span:<span th:text="${msg+'你好'}"></span></h1>
 <h1>text:<input type="text" th:value="${msg}" id="text"></input></h1>
+<h1>list循环:<ul><li th:each="key:${list}"><span th:text="${key}"></span></li></ul></h1>
 </body>
 </html>
