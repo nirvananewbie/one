@@ -49,4 +49,9 @@
     
     <!-- 定义无Controller的path<->view直接映射 -->
 	<mvc:view-controller path="/" view-name="redirect:/page/index" />
+
+	<!-- zkclient org.I0Itec.zkclient.ZkClient-->
+	<bean id="zkClient" class="org.I0Itec.zkclient.ZkClient">
+		<constructor-arg name="serverstring" value="10.20.16.74:2181"/>
+	</bean>
 </beans>

@@ -5,8 +5,31 @@
 <head>
     <meta name="content-type" content="text/html; charset=UTF-8"/>
     <title>thymleaf示例页面</title>
-    <script th:href="@{/static/js/jquery-1.9.1.min.js}"></script>
+    <script th:src="@{/static/js/jquery-1.9.1.min.js}"></script>
     <link rel="stylesheet" th:href="@{/static/css/main.css}" />
+    <script>
+        /*<![CDATA[*/
+        function btnClick(){
+            var msg = /*[[${msg}]]*/'test';
+            alert(msg);
+        }
+
+        function setZkVal(){
+            $.ajax({
+                url:$('#baseUrl').val()+'/setZkVal',
+                type : 'post',
+                async : false,
+                dataType : 'json',
+                data : {
+                    "zk" : $('#zk').val()
+                },
+                success : function(data) {
+                    alert(data);
+                }
+            });
+        }
+        /*]]>*/
+    </script>
 </head>
 <body>
 <input type="hidden" id="baseUrl" th:value="@{/}"/>
@@ -14,5 +37,12 @@
 <h1>span:<span th:text="${msg+'你好'}"></span></h1>
 <h1>text:<input type="text" th:value="${msg}" id="text"></input></h1>
 <h1>list循环:<ul><li th:each="key:${list}"><span th:text="${key}"></span></li></ul></h1>
+<h1>按钮点击事件：</h1><input type="button" value="点击我" onclick="btnClick()" />
+<h1>图片:</h1><img th:src="@{/static/image/demo.jpg}" />
+<h1>if用法：</h1><div th:if="${flag == 'yes'}">flag值为yes</div><div th:if="${flag == 'no'}">flag值为no</div>
+<h1>mysql取值：</h1><span th:text="${user.name}"></span>
+<h1>zookeeper取值：</h1><span th:text="${zk}"></span>
+<input type="button" value="重设zk值" onclick="setZkVal()" />
+<input type="text" id="zk"/>
 </body>
 </html>

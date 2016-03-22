@@ -34,6 +34,6 @@
         <!-- 通用SQL语句片段 -->
         <mapper resource="mybatis/mapper/common_SqlMap.xml"/>
         <!-- 业务mapper -->
-        
+        <mapper resource="mybatis/mapper/TUserMapper.xml"/>
     </mappers>
 </configuration>
