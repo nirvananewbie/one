@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      xmlns:dt="http://www.thymeleaf.org/dandelion/datatables">
+<head>
+    <meta name="content-type" content="text/html; charset=UTF-8"/>
+    <title>zookeeper示例页面</title>
+    <script th:src="@{/static/js/jquery-1.9.1.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/static/css/main.css}" />
+    <script>
+        /*<![CDATA[*/
+        function setZkVal(){
+            $.ajax({
+                url:$('#baseUrl').val()+'/setZkVal',
+                type : 'post',
+                async : false,
+                dataType : 'json',
+                data : {
+                    "zk" : $('#zk').val()
+                },
+                success : function(data) {
+                    alert(data);
+                }
+            });
+        }
+        /*]]>*/
+    </script>
+</head>
+<body>
+<input type="hidden" id="baseUrl" th:value="@{/}"/>
+<h1>zookeeper取值：</h1><span th:text="${zk}"></span>
+<input type="button" value="重设zk值" onclick="setZkVal()" />
+<input type="text" id="zk"/>
+</body>
+</html>

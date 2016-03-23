@@ -14,20 +14,6 @@
             alert(msg);
         }
 
-        function setZkVal(){
-            $.ajax({
-                url:$('#baseUrl').val()+'/setZkVal',
-                type : 'post',
-                async : false,
-                dataType : 'json',
-                data : {
-                    "zk" : $('#zk').val()
-                },
-                success : function(data) {
-                    alert(data);
-                }
-            });
-        }
         /*]]>*/
     </script>
 </head>
@@ -41,8 +27,5 @@
 <h1>图片:</h1><img th:src="@{/static/image/demo.jpg}" />
 <h1>if用法：</h1><div th:if="${flag == 'yes'}">flag值为yes</div><div th:if="${flag == 'no'}">flag值为no</div>
 <h1>mysql取值：</h1><span th:text="${user.name}"></span>
-<h1>zookeeper取值：</h1><span th:text="${zk}"></span>
-<input type="button" value="重设zk值" onclick="setZkVal()" />
-<input type="text" id="zk"/>
 </body>
 </html>
