@@ -301,6 +301,13 @@
           <version>0.1</version>
       </dependency>
       <!--zkclient end-->
+      <!-- jedis -->
+      <dependency>
+          <groupId>redis.clients</groupId>
+          <artifactId>jedis</artifactId>
+          <version>2.2.1</version>
+      </dependency>
+      <!-- jedis -->
   </dependencies>
   <build>
     <finalName>one</finalName>

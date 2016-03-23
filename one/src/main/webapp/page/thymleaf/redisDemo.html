@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      xmlns:dt="http://www.thymeleaf.org/dandelion/datatables">
+<head>
+    <meta name="content-type" content="text/html; charset=UTF-8"/>
+    <title>redis示例页面</title>
+    <script th:src="@{/static/js/jquery-1.9.1.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/static/css/main.css}" />
+    <script>
+        /*<![CDATA[*/
+        function setVal(){
+            $.ajax({
+                url:$('#baseUrl').val()+'/setVal',
+                type : 'post',
+                async : false,
+                dataType : 'json',
+                data : {
+                    "user" : $('#user').val()
+                },
+                success : function(data) {
+                    console.info(data);
+                    window.location.reload();
+                }
+            });
+        }
+        /*]]>*/
+    </script>
+</head>
+<body>
+<input type="hidden" id="baseUrl" th:value="@{/}"/>
+<h1>redis取"user"值：</h1><span th:text="${user}"></span>
+<input type="button" value="重设user值" onclick="setVal()" />
+<input type="text" id="user"/>
+</body>
+</html>
