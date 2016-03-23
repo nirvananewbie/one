@@ -40,7 +40,25 @@
 		class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
 		<property name="favorPathExtension" value="false" />
 	</bean>
-	
+	<context:property-placeholder location="classpath:redis.properties" ignore-unresolvable="true"/>
+	<!-- 将多个配置文件位置放到列表中 -->
+	<!--<bean id="propertyResources" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				&lt;!&ndash; 这里支持多种寻址方式：classpath和file &ndash;&gt;
+				<value>classpath:redis.properties</value>
+				&lt;!&ndash; 推荐使用file的方式引入，这样可以将配置和代码分离 &ndash;&gt;
+				&lt;!&ndash;<value>file:/opt/demo/config/demo-mq.properties</value>
+				<value>file:/opt/demo/config/demo-remote.properties</value>&ndash;&gt;
+			</list>
+		</constructor-arg>
+	</bean>
+
+	&lt;!&ndash; 将配置文件读取到容器中，交给Spring管理 &ndash;&gt;
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations" ref="propertyResources" />
+	</bean>-->
+
 	<!-- JSP视图文件解析配置 -->
 <!-- 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">   -->
 <!--         <property name="prefix" value="/WEB-INF/view/" />   -->
@@ -53,5 +71,23 @@
 	<!-- zkclient org.I0Itec.zkclient.ZkClient-->
 	<bean id="zkClient" class="org.I0Itec.zkclient.ZkClient">
 		<constructor-arg name="serverstring" value="10.20.16.74:2181"/>
+	</bean>
+	<!-- jedis 单线程-->
+	<bean id="jedis" class="redis.clients.jedis.Jedis">
+		<constructor-arg name="host" value="${redis.host}"/>
+		<constructor-arg name="port" value="${redis.port}"/>
+	</bean>
+	<!-- jedis-pool 多线程-->
+	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+		<property name="maxTotal" value="${redis.maxTotal}"/>
+		<property name="maxIdle" value="${redis.maxIdle}"/>
+		<property name="maxWaitMillis" value="${redis.maxWaitMillis}"/>
+		<property name="testOnBorrow" value="true"/>
+		<property name="testOnReturn" value="true"/>
+	</bean>
+	<bean id="jedisPool" class="redis.clients.jedis.JedisPool">
+		<constructor-arg index="0" ref="jedisPoolConfig"/>
+		<constructor-arg index="1" value="${redis.hostname}" />
+		<constructor-arg index="2" value="${redis.port}" />
 	</bean>
 </beans>
